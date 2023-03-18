@@ -13,7 +13,7 @@ function showFormModal() {
     const formModal = document.querySelector("section.form");
     formModal.style.display = "flex";
     submitButton.addEventListener("click", hideFormModal);
-    closeModal.addEventListener("click", hideFormModal);
+    closeModal.addEventListener("click", closeModalFunction);
     }
 
 function createNewBook() {
@@ -21,10 +21,18 @@ function createNewBook() {
     const newAuthor = document.querySelector('input[id="author"]').value;
     const newPages = document.querySelector('input[id="pages"]').value;
     const check = document.querySelector('input[id="read"]').checked;
-    const newRead = check === true ? "read" : "not read yet";  
-    const newBook = new Book(newTitle, newAuthor, newPages, newRead);
-    myBooks.push(newBook);
-    displayBooks();
+    const newRead = check === true ? "read" : "not read yet";
+    // create newBook object only if the new title author and pages input fields aren't empty.
+    if (newTitle && newAuthor && newPages) {
+      const newBook = new Book(newTitle, newAuthor, newPages, newRead);
+      myBooks.push(newBook);
+      displayBooks();
+      const formModal = document.querySelector("section.form");
+      formModal.style.display = "none";
+    }
+    else {
+        alert("Book Entry Cannot Be Empty")
+    }  
 }
 
 function Book(title, author, pages, read) {
@@ -36,15 +44,16 @@ function Book(title, author, pages, read) {
 }
 
 function hideFormModal(event) {
-    const formModal = document.querySelector("section.form");
-    formModal.style.display = "none";
     const form = document.querySelector("form");
-    if (this === closeModal) {
-        form.reset();
-        return
-    }
-    submitButton.removeEventListener("click", hideFormModal);
     createNewBook();
+    form.reset();
+    event.preventDefault();
+}
+
+function closeModalFunction() {
+    const formModal = document.querySelector("section.form");
+    const form = document.querySelector("form");
+    formModal.style.display = "none";
     form.reset();
 }
 
