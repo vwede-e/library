@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #FF5E6C; 
+    --secondary-color: rgb(23, 163, 137);
+    --font-color: #ffffff;
+    --padding: 25px;
+    --margin: 25px;
+    font-size: 14px;
+    font-family: san-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    background-color: var(--primary-color);
+    padding: var(--padding);
+    color: var(--font-color);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+}
+
+main {
+    flex: 1 1 auto;
+}
+
+section.first-section {
+    padding: calc(2.5 * var(--padding)) var(--padding);
+    text-align: center;
+    color: var(--font-color);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-image: linear-gradient(rgb(0, 0, 0, 0.5),rgb(0, 0, 0, 0.5)), url(./images/library.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.first-section p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0 var(--margin);
+}
+
+button {
+    padding: 12px 24px;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    border: none;
+    color: var(--font-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+button:hover {
+    --secondary-color: #53537e;
+}
+
+button[type="submit"] {
+    display: block;
+    margin: auto;
+    margin-top: 15px;
+}
+
+section.second-section {
+    padding: var(--padding);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--padding);
+    background-color: #ededed;
+}
+
+section.form {
+    background-color: rgb(0, 0, 0, 0.7);
+    padding: var(--padding);
+    color: var(--font-color);
+    border-radius: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+form {
+    background-color: var(--primary-color);
+    padding: var(--padding);
+    width: max(50%, 300px);  
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+div.form-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--margin);
+}
+
+input[type="text"] {
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: calc(var(--margin) - 10px);
+    margin-top: 5px;
+}
+
+label {
+    font-weight: 600;
+}
+
+.book-list {
+    box-shadow: 1px 1px 5px #53537e;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: var(--padding);
+}
+
+.book-list p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.book-list button {
+    margin: 0 var(--margin);
+}
+
+.book-list button:last-of-type {
+    background-color: var(--primary-color);
+}
+
+footer {
+    text-align: center;
+    font-size: 1.3rem;
+}
