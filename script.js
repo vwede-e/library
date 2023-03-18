@@ -26,7 +26,7 @@ function createNewBook() {
     if (newTitle && newAuthor && newPages) {
       const newBook = new Book(newTitle, newAuthor, newPages, newRead);
       myBooks.push(newBook);
-      displayBooks();
+      createBookCard(newBook);
       const formModal = document.querySelector("section.form");
       formModal.style.display = "none";
     }
@@ -58,52 +58,51 @@ function closeModalFunction() {
 }
 
 function displayBooks() {
+    myBooks.forEach(createBookCard);
+}
+
+function createBookCard(book) {
     const secondSection = document.querySelector("section.second-section");
-    while (secondSection.firstElementChild) {
-        secondSection.removeChild(secondSection.firstElementChild);
-    }
-    myBooks.forEach(book=> {
-        div = document.createElement("div");
-        para1 = document.createElement("p");
-        para2 = document.createElement("p");
-        para3 = document.createElement("p");
-        button1 = document.createElement("button");
-        button2 = document.createElement("button");
-        para1.textContent = book.title;
-        para2.textContent = book.author;
-        para3.textContent = book.pages;
-        button1.textContent = book.read;
-        button2.textContent = "Delete Book";
-        div.appendChild(para1);
-        div.appendChild(para2);
-        div.appendChild(para3);
-        div.appendChild(button1);
-        div.appendChild(button2);
-        div.setAttribute("class", "book-list");
-        div.setAttribute("data-uniqueAttr", book.uniqueAttr);
-        secondSection.appendChild(div);
-        activateCardButtons();
-    })
+    div = document.createElement("div");
+    para1 = document.createElement("p");
+    para2 = document.createElement("p");
+    para3 = document.createElement("p");
+    button1 = document.createElement("button");
+    button2 = document.createElement("button");
+    para1.textContent = book.title;
+    para2.textContent = book.author;
+    para3.textContent = book.pages;
+    button1.textContent = book.read;
+    button2.textContent = "Delete Book";
+    div.appendChild(para1);
+    div.appendChild(para2);
+    div.appendChild(para3);
+    div.appendChild(button1);
+    div.appendChild(button2);
+    div.setAttribute("class", "book-list");
+    div.setAttribute("data-uniqueAttr", book.uniqueAttr);
+    secondSection.appendChild(div);
+    activateCardButtons(div);
 }
 
-function activateCardButtons() {
-    const deleteList = document.querySelectorAll("section.second-section div button:last-of-type");
-    deleteList.forEach((button)=> button.addEventListener("click", deleteButtonsEventHandler))
-    const readList = document.querySelectorAll("section.second-section div button:first-of-type");
-    readList.forEach((button)=> button.addEventListener("click", readButtonsEventHandler));
+function activateCardButtons(div) {
+    const readButton = div.querySelector("button:first-of-type");
+    readButton.addEventListener("click", readButtonEventHandler);
+    const deleteButton = div.querySelector("button:last-of-type");
+    deleteButton.addEventListener("click", deleteButtonEventHandler);    
 }
 
-function deleteButtonsEventHandler() {
+function deleteButtonEventHandler() {
     const secondSection = document.querySelector("section.second-section");
     const uniqueAttr = this.parentElement.getAttribute("data-uniqueAttr");
-    index = myBooks.findIndex(book => book.uniqueAttr === +uniqueAttr);
+    const index = myBooks.findIndex(book => book.uniqueAttr === +uniqueAttr);
     myBooks.splice(index, 1);
     secondSection.removeChild(this.parentElement);
 }
 
-function readButtonsEventHandler() {
+function readButtonEventHandler() {
     const uniqueAttr = this.parentElement.getAttribute("data-uniqueAttr");
-    index = myBooks.findIndex(book=> book.uniqueAttr === +uniqueAttr);
+    const index = myBooks.findIndex(book=> book.uniqueAttr === +uniqueAttr);
     if (this.textContent === "read") {
         this.textContent = "not read yet";
     }
