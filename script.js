@@ -12,7 +12,7 @@ addBookButton.addEventListener("click", showFormModal);
 function showFormModal() {
     const formModal = document.querySelector("section.form");
     formModal.style.display = "flex";
-    submitButton.addEventListener("click", hideFormModal);
+    submitButton.addEventListener("click", submitButtonHandler);
     closeModal.addEventListener("click", closeModalFunction);
     }
 
@@ -27,11 +27,10 @@ function createNewBook() {
       const newBook = new Book(newTitle, newAuthor, newPages, newRead);
       myBooks.push(newBook);
       createBookCard(newBook);
-      const formModal = document.querySelector("section.form");
-      formModal.style.display = "none";
+      closeModalFunction();
     }
     else {
-        alert("Book Entry Cannot Be Empty")
+        alert("Book Entry Cannot Be Empty");
     }  
 }
 
@@ -43,10 +42,8 @@ function Book(title, author, pages, read) {
     this.uniqueAttr = myBooks.length;
 }
 
-function hideFormModal(event) {
-    const form = document.querySelector("form");
+function submitButtonHandler(event) {
     createNewBook();
-    form.reset();
     event.preventDefault();
 }
 
