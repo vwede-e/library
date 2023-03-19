@@ -5,13 +5,13 @@ const myBooks = [
 ]; 
 
 const addBookButton = document.querySelector("button.add-new-book");
-const submitButton = document.querySelector('button[type="submit"]');
-const closeModal = document.querySelector("span");
 addBookButton.addEventListener("click", showFormModal);
 
 function showFormModal() {
     const formModal = document.querySelector("section.form");
     formModal.style.display = "flex";
+    const submitButton = document.querySelector('button[type="submit"]');
+    const closeModal = document.querySelector("span");
     submitButton.addEventListener("click", submitButtonHandler);
     closeModal.addEventListener("click", closeModalFunction);
     }
@@ -21,7 +21,7 @@ function createNewBook() {
     const newAuthor = document.querySelector('input[id="author"]').value;
     const newPages = document.querySelector('input[id="pages"]').value;
     const check = document.querySelector('input[id="read"]').checked;
-    const newRead = check === true ? "read" : "not read yet";
+    const newRead = check ? "read" : "not read yet";
     // create newBook object only if the new title author and pages input fields aren't empty.
     if (newTitle && newAuthor && newPages) {
       const newBook = new Book(newTitle, newAuthor, newPages, newRead);
