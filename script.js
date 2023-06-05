@@ -4,6 +4,15 @@ const myBooks = [
     {title: "The Gods Must Be Crazy", author: "Jamie Uys", pages: 198, read: "not read", uniqueAttr: 2 },
 ]; 
 
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author,
+        this.read = read;
+        this.uniqueAttr = myBooks.length;
+    }
+}
+
 const addBookButton = document.querySelector("button.add-new-book");
 addBookButton.addEventListener("click", showFormModal);
 
@@ -34,13 +43,14 @@ function createNewBook() {
     }  
 }
 
-function Book(title, author, pages, read) {
+/*function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
     this.uniqueAttr = myBooks.length;
-}
+} */
+
 
 function submitButtonHandler(event) {
     createNewBook();
